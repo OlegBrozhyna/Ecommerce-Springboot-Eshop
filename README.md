@@ -23,4 +23,3 @@
 * User registration/login with role-based authorization.
 * Admin portal for CRUD operations on products (only available to admin user).
 * Purchase: view product details, add to cart, checkout, place order with shipping address
-* 
