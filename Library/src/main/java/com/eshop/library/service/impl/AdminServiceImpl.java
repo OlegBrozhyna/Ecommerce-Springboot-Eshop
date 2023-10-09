@@ -6,7 +6,6 @@ import com.eshop.library.repository.AdminRepository;
 import com.eshop.library.repository.RoleRepository;
 import com.eshop.library.service.AdminService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
