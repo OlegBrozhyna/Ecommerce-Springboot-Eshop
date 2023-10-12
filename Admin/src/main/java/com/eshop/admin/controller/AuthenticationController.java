@@ -15,15 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 
-public class LoginController {
+public class AuthenticationController {
     private final AdminServiceImpl adminService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public LoginController(AdminServiceImpl adminService, BCryptPasswordEncoder passwordEncoder) {
+    public AuthenticationController(AdminServiceImpl adminService, BCryptPasswordEncoder passwordEncoder) {
         this.adminService = adminService;
         this.passwordEncoder = passwordEncoder;
     }
