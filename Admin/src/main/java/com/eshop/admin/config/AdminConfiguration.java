@@ -61,4 +61,5 @@ public class AdminConfiguration {
                 .authenticationManager(authenticationManager);   // Set a custom AuthenticationManager
         return http.build();
     }
+
 }
