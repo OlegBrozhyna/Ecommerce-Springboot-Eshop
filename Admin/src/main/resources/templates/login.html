@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "https://www.thymeleaf.org/">
 
-<head th:replace="fragments :: header">
+<head th:replace="~{fragments::header}">
 </head>
 
 <body class="bg-gradient-primary">
@@ -63,7 +63,7 @@
 
     </div>
 
-<div th:replace="fragments :: script"></div>
+<div th:replace="~{fragments::script}"></div>
 </body>
 
 </html>
