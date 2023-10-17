@@ -52,10 +52,14 @@
                            class="btn btn-primary">Update</a>
                     </td>
                     <td>
-                        <a th:if="${category.deleted} == true" th:href="@{/enable-category/(id = ${category.id})}"
+                        <a th:if="${category.deleted} == true" th:href="@{'/enable-category?id=' + ${category.id}}"
                            class="btn btn-primary">Enable</a>
-                        <a th:if="${category.deleted} == false" th:href="@{/delete-category/(id = ${category.id})}"
-                           class=" btn btn-danger">Delete</a>
+
+                        <a th:if="${category.deleted} == false" th:href="@{'/delete-category?id=' + ${category.id}}"
+                           class="btn btn-danger">Delete</a>
+
+
+
                     </td>
                 </tr>
                 </tbody>

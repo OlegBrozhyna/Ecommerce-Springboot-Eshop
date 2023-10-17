@@ -21,7 +21,6 @@ import java.util.Optional;
 public class CategoryController {
     private final CategoryService categoryService;
 
-
     @GetMapping("/categories")
     public String categories(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -35,7 +34,6 @@ public class CategoryController {
         model.addAttribute("categoryNew", new Category());
         return "categories";
     }
-
     @PostMapping("/save-category")
     public String save(@ModelAttribute("categoryNew") Category category, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -53,7 +51,6 @@ public class CategoryController {
         }
         return "redirect:/categories";
     }
-
     @RequestMapping(value = "/findById", method = {RequestMethod.PUT, RequestMethod.GET})
     @ResponseBody
     public Optional<Category> findById(Long id) {
@@ -74,6 +71,35 @@ public class CategoryController {
         }
         return "redirect:/categories";
     }
+    @RequestMapping(value = "/delete-category", method = {RequestMethod.GET, RequestMethod.PUT})
+    public String delete(Long id, RedirectAttributes redirectAttributes) {
+        try {
+            categoryService.deleteById(id);
+            redirectAttributes.addFlashAttribute("success", "Deleted successfully!");
+        } catch (DataIntegrityViolationException e1) {
+            e1.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "Duplicate name of category, please check again!");
+        } catch (Exception e2) {
+            e2.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "Error server");
+        }
+        return "redirect:/categories";
+    }
+    @RequestMapping(value = "/enable-category", method = {RequestMethod.PUT, RequestMethod.GET})
+    public String enable(Long id, RedirectAttributes redirectAttributes) {
+        try {
+            categoryService.enableById(id);
+            redirectAttributes.addFlashAttribute("success", "Enable successfully");
+        } catch (DataIntegrityViolationException e1) {
+            e1.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "Duplicate name of category, please check again!");
+        } catch (Exception e2) {
+            e2.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "Error server");
+        }
+        return "redirect:/categories";
+    }
 }
+
 
 
