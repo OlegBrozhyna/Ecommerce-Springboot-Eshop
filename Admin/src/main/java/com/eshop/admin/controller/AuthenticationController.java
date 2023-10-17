@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-
 public class AuthenticationController {
+    // Dependency injection of AdminService and BCryptPasswordEncoder
     private final AdminServiceImpl adminService;
     private final BCryptPasswordEncoder passwordEncoder;
 
@@ -27,15 +27,18 @@ public class AuthenticationController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // Handle login page request
     @RequestMapping("/login")
     public String login(Model model) {
         model.addAttribute("title", "Login Page");
         return "login";
     }
 
+    // Handle home page request
     @RequestMapping("/index")
     public String index(Model model) {
         model.addAttribute("title", "Home Page");
+        // Check if the user is authenticated, if not, redirect to the login page
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return "redirect:/login";
@@ -43,6 +46,7 @@ public class AuthenticationController {
         return "index";
     }
 
+    // Handle register page request
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("title", "Register");
@@ -50,24 +54,27 @@ public class AuthenticationController {
         return "register";
     }
 
+    // Handle forgot password page request
     @GetMapping("/forgot-password")
     public String forgotPassword(Model model) {
         model.addAttribute("title", "Forgot Password");
         return "forgot-password";
     }
 
+    // Handle registration form submission
     @PostMapping("/register-new")
     public String addNewAdmin(@Valid @ModelAttribute("adminDto") AdminDto adminDto,
                               BindingResult result,
                               Model model) {
-
         try {
-
+            // Check for validation errors
             if (result.hasErrors()) {
                 model.addAttribute("adminDto", adminDto);
                 result.toString();
                 return "register";
             }
+
+            // Check if the username already exists
             String username = adminDto.getUsername();
             Admin admin = adminService.findByUsername(username);
             if (admin != null) {
@@ -76,6 +83,8 @@ public class AuthenticationController {
                 model.addAttribute("emailError", "Your email has been registered!");
                 return "register";
             }
+
+            // If passwords match, encode and save the admin data
             if (adminDto.getPassword().equals(adminDto.getRepeatPassword())) {
                 adminDto.setPassword(passwordEncoder.encode(adminDto.getPassword()));
                 adminService.save(adminDto);
@@ -84,15 +93,14 @@ public class AuthenticationController {
                 model.addAttribute("adminDto", adminDto);
             } else {
                 model.addAttribute("adminDto", adminDto);
-                model.addAttribute("passwordError", "Your password maybe wrong! Check again!");
-                System.out.println("password not same");
+                model.addAttribute("passwordError", "Your password may be wrong! Check again!");
+                System.out.println("password not the same");
                 return "register";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("errors", "The server has been wrong!");
+            model.addAttribute("errors", "The server has encountered an error!");
         }
         return "register";
-
     }
 }
