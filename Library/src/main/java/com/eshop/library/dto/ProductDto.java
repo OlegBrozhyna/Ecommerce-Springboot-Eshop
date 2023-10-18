@@ -12,12 +12,11 @@ public class ProductDto {
     private Long id;
     private String name;
     private String description;
-    private int currentQuantity;
     private double costPrice;
     private double salePrice;
-    private String image;
+    private int currentQuantity;
     private Category category;
+    private String image;
     private boolean activated;
     private boolean deleted;
-
 }
