@@ -3,6 +3,7 @@ package com.eshop.library.service.impl;
 import com.eshop.library.dto.ProductDto;
 import com.eshop.library.model.Product;
 import com.eshop.library.repository.ProductRepository;
+import com.eshop.library.service.ProductService;
 import com.eshop.library.utils.ImageUpload;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -3,7 +3,7 @@ package com.eshop.admin.controller;
 import com.eshop.library.dto.ProductDto;
 import com.eshop.library.model.Category;
 import com.eshop.library.service.CategoryService;
-import com.eshop.library.service.impl.ProductService;
+import com.eshop.library.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;

@@ -1,4 +1,4 @@
-package com.eshop.library.service.impl;
+package com.eshop.library.service;
 
 import com.eshop.library.dto.ProductDto;
 import com.eshop.library.model.Product;
