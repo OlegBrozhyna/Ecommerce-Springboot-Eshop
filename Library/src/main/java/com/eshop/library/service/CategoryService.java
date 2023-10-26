@@ -1,5 +1,6 @@
 package com.eshop.library.service;
 
+import com.eshop.library.dto.CategoryDto;
 import com.eshop.library.model.Category;
 
 import java.util.List;
@@ -19,6 +20,6 @@ public interface CategoryService {
     void deleteById(Long id);
 
     void enableById(Long id);
-//
-//    List<CategoryDto> getCategoriesAndSize();
+
+    List<CategoryDto> getCategoriesAndSize();
 }

@@ -1,5 +1,6 @@
 package com.eshop.library.service.impl;
 
+import com.eshop.library.dto.CategoryDto;
 import com.eshop.library.model.Category;
 import com.eshop.library.repository.CategoryRepository;
 import com.eshop.library.service.CategoryService;
@@ -74,8 +75,8 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     // Method to retrieve a list of categories along with their sizes
-//    public List<CategoryDto> getCategoriesAndSize() {
-//        List<CategoryDto> categories = categoryRepository.getCategoriesAndSize();
-//        return categories;
-//    }
+    public List<CategoryDto> getCategoriesAndSize() {
+        List<CategoryDto> categories = categoryRepository.getCategoriesAndSize();
+        return categories;
+    }
 }
