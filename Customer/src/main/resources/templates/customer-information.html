@@ -16,14 +16,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <!-- Site CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" th:href="@{/css/responsive.css}">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
 
     <script src="Change-Password.js"></script>
 
@@ -46,15 +45,25 @@
 
 <!-- Start All Title Box -->
 <div th:replace="fragments::all-title-box">
+
 </div>
 <!-- End All Title Box -->
+
+
+<a th:href="@{/shop-detail}" style="margin-top: 5px;" class="btn btn-black text-center buttonWrapper">Shop Detail</a>
+<a th:href="@{/orders}" style="margin-top: 5px;" class="btn btn-black text-center buttonWrapper">Your order</a>
+<a th:href="@{/logout}" style="margin-top: 5px;" class="btn btn-black text-center buttonWrapper">Logout</a>
+
+
 <div class="mainDiv">
     <div class="cardStyle">
         <h2 class="formTitle">
             <i>Personal Information</i>
+
         </h2>
         <div th:if="${success}" class="text-center alert alert-success">
             <p th:text="${success}"></p>
+
         </div>
         <form th:action="@{/update-profile}" method="post" name="signupForm" id="signupForm" th:object="${customer}">
             <div class="inputDiv">
@@ -93,8 +102,7 @@
             </div>
             <div class="inputDiv">
                 <label class="inputLabel" for="city">City *</label>
-                <select class="form-control" id="city" th:field="*{city}" name="country" required
-                        th:each="country: ${countries}">
+                <select class="form-control" id="city" th:field="*{city}" name="city" required>
                     <option value="">-SELECT-</option>
                     <option th:each="city : ${cities}"
                             th:value="${city.id}"
@@ -115,12 +123,14 @@
             </div>
 
             <div class="buttonWrapper">
+
                 <button type="submit" id="submitButton" class="submitButton pure-button pure-button-primary">
                     <span>Save</span>
                 </button>
             </div>
             <a th:href="@{/change-password}" style="margin-top: 5px;" class="btn btn-primary text-center buttonWrapper">Change
                 password</a>
+
 
         </form>
     </div>

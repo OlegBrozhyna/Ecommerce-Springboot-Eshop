@@ -105,14 +105,24 @@
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/menu}">Menu</a></li>
+<!--                    <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>-->
+                    <li th:if="${#authorization.expression('isFullyAuthenticated')}">
+                        <a class="nav-link" th:href="@{/profile}">My Account</a>
+                    </li>
+                    <li th:unless="${#authorization.expression('isFullyAuthenticated')}">
+                        <a class="nav-link" th:href="@{/login}">Login</a>
 
+                    </li>
                     <li class="dropdown">
-                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Shop</a>
+<!--                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Shop</a>-->
                         <ul class="dropdown-menu">
                             <li><a th:href="@{/shop-detail}">Shop Detail</a></li>
                             <li><a th:href="@{/orders}">Your order</a></li>
-                            <li><a th:href="@{/profile}">My Account</a></li>
+                            <li th:if="${#authorization.expression('isFullyAuthenticated')}">
+                                <a th:href="@{/profile}">My Account</a>
+                            </li>
                         </ul>
+
                     </li>
                     <li class="nav-item active"><a class="nav-link" th:href="@{/contact}">Contact Us</a></li>
                 </ul>
@@ -160,7 +170,9 @@
                 <h2 th:text="${page}"></h2>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="home.html">Ocean Prime</a></li>
+
                     <li class="breadcrumb-item active" th:text="${page}"></li>
+
                 </ul>
             </div>
         </div>

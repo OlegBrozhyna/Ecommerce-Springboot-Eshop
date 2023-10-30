@@ -1,41 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<!-- Basic -->
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="~{fragments::head}"></div>
+    <!-- Basic -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!-- Site CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" th:href="@{/css/responsive.css}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
 
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <script th:src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script th:src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif-->
 </head>
-
 <body>
 <!-- Start Main Top -->
-<div th:replace="~{fragments::main-top}">
-</div>
+<div th:replace="~{fragments::main-top}"></div>
 <!-- End Main Top -->
 
-
-<!-- Start Main Top -->
-<header th:replace="~{fragments::main-header}">
-</header>
-<!-- End Main Top -->
+<!-- Start Main Header -->
+<header th:replace="~{fragments::main-header}"></header>
+<!-- End Main Header -->
 
 <!-- Start Top Search -->
-<div th:replace="~{fragments::top-search}">
-</div>
+<div th:replace="~{fragments::top-search}"></div>
 <!-- End Top Search -->
 
-
 <!-- Start All Title Box -->
-<div th:replace="fragments::all-title-box">
-</div>
+<div th:replace="~{fragments::all-title-box}"></div>
 <!-- End All Title Box -->
 
-<!-- Start Shop Page  -->
+<!-- Start Shop Page -->
 <div class="shop-box-inner">
     <div class="container">
         <div class="row">
@@ -48,12 +46,10 @@
                                 <select id="basic" class="selectpicker show-tick form-control"
                                         data-placeholder="$ USD" onchange="location = this.value;">
                                     <option>--Select--</option>
-                                    <option value="http://localhost:8889/shop/shop-detail">Normal</option>
-                                    <option value="http://localhost:8889/shop/high-price">High Price → Low Price
-                                    </option>
-                                    <option value="http://localhost:8889/shop/lower-price">Low Price → High Price
-                                    </option>
-                                    <option value="4">Best Selling</option>
+                                    <option th:value="@{/shop/shop-detail}">Normal</option>
+                                    <option th:value="@{/shop/high-price}">High Price → Low Price</option>
+                                    <option th:value="@{/shop/lower-price}">Low Price → High Price</option>
+                                    <option>Best Selling</option>
                                 </select>
                             </div>
                             <p>Showing all results</p>
@@ -80,7 +76,7 @@
                                         <form th:action="@{/add-to-cart}" method="post">
                                             <div class="products-single fix">
                                                 <div class="box-img-hover">
-                                                    <img th:src="'data:image/jpeg;base64,' + ${product.image}}"
+                                                    <img th:src="'data:image/jpeg;base64,' + ${product.image}"
                                                          class="img-fluid" alt="Image">
                                                     <div class="mask-icon">
                                                         <ul>
@@ -110,9 +106,8 @@
                                             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                                 <div class="products-single fix">
                                                     <div class="box-img-hover">
-                                                        <img th:src="'data:image/jpeg;base64,' + ${productView.image}}"
-                                                             class="img-fluid"
-                                                             alt="Image">
+                                                        <img th:src="'data:image/jpeg;base64,' + ${productView.image}"
+                                                             class="img-fluid" alt="Image">
                                                     </div>
                                                 </div>
                                             </div>
@@ -164,23 +159,13 @@
     </div>
 </div>
 
-<!-- End Shop Page -->
+<!-- Start Feed -->
+<div th:replace="~{fragments::instagram-box}"></div>
+<!-- End Feed -->
 
-<!-- Start Feed  -->
-<div th:replace="~{fragments::instagram-box}">
-
-</div>
-
-<!-- End Feed  -->
-
-
-<!-- Start Footer  -->
-<footer th:replace="~{fragments::footer}">
-
-</footer>
-
+<!-- Start Footer -->
+<footer th:replace="~{fragments::footer}"></footer>
 
 <div th:replace="~{fragments::script}"></div>
 </body>
-
 </html>

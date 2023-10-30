@@ -23,7 +23,8 @@ public class ShoppingCart {
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private Customer customer;
 
-    private double totalPrice;
+    @Column(nullable = false)
+    private double totalPrice = 0.0;
     private int totalItems;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
