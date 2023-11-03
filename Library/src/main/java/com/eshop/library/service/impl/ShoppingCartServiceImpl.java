@@ -28,85 +28,57 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart addItemToCart(ProductDto productDto, int quantity, String username) {
-        // Retrieve the customer based on the username
+        // Retrieves the customer by username
         Customer customer = customerService.findByUsername(username);
 
-        // Get the shopping cart associated with the customer
+        // Retrieves the shopping cart associated with the customer
         ShoppingCart shoppingCart = customer.getCart();
 
-        // If the shopping cart is not created for the customer, create a new one
+        // If the cart is empty, a new ShoppingCart instance is created
         if (shoppingCart == null) {
             shoppingCart = new ShoppingCart();
         }
 
-        // Retrieve the list of items in the shopping cart
+        // Retrieves the list of items in the cart
         Set<CartItem> cartItemList = shoppingCart.getCartItems();
 
-        // Find the specific item in the cart based on the product ID
+        // Finds a specific item in the cart based on the product ID
         CartItem cartItem = find(cartItemList, productDto.getId());
 
-        // Transfer ProductDto to Product object
+        // Transforms the product data transfer object into a Product entity
         Product product = transfer(productDto);
 
-        // Calculate the unit price of the product
+        // Retrieves the unit price and quantity of the product
         double unitPrice = productDto.getCostPrice();
+        int itemQuantity = quantity;
 
-        int itemQuantity = 0;
-
-        // If the cart item list is null, initialize it and add or update the cart item
-        if (cartItemList == null) {
-            cartItemList = new HashSet<>();
-            if (cartItem == null) {
-                // If the item doesn't exist in the cart, create a new cart item
-                cartItem = new CartItem();
-                cartItem.setProduct(product);
-                cartItem.setCart(shoppingCart);
-                cartItem.setQuantity(quantity);
-                cartItem.setUnitPrice(unitPrice);
-                cartItem.setCart(shoppingCart);
-                cartItemList.add(cartItem);
-                itemRepository.save(cartItem);
-            } else {
-                // If the item exists, update the quantity and save the changes
-                itemQuantity = cartItem.getQuantity() + quantity;
-                cartItem.setQuantity(itemQuantity);
-                itemRepository.save(cartItem);
-            }
+        // If the item is found in the cart, the quantity is updated
+        if (cartItem != null) {
+            itemQuantity += cartItem.getQuantity();
         } else {
-            if (cartItem == null) {
-                // If the item doesn't exist in the cart, create a new cart item
-                cartItem = new CartItem();
-                cartItem.setProduct(product);
-                cartItem.setCart(shoppingCart);
-                cartItem.setQuantity(quantity);
-                cartItem.setUnitPrice(unitPrice);
-                cartItem.setCart(shoppingCart);
-                cartItemList.add(cartItem);
-                itemRepository.save(cartItem);
-            } else {
-                // If the item exists, update the quantity and save the changes
-                itemQuantity = cartItem.getQuantity() + quantity;
-                cartItem.setQuantity(itemQuantity);
-                itemRepository.save(cartItem);
-            }
+            // If the item is not found, a new CartItem is created and added to the cart
+            cartItem = new CartItem();
+            cartItem.setProduct(product);
+            cartItem.setCart(shoppingCart);
+            cartItemList.add(cartItem);
         }
 
-        // Set the updated cart items to the shopping cart
+        // Updates the quantity and unit price of the item
+        cartItem.setQuantity(itemQuantity);
+        cartItem.setUnitPrice(unitPrice);
+
+        // Saves the cart item to the repository
+        itemRepository.save(cartItem);
+
+        // Updates the list of items in the shopping cart, total price, total items, and the associated customer
         shoppingCart.setCartItems(cartItemList);
-
-        // Calculate total price and total items in the shopping cart
-        double totalPrice = totalPrice(shoppingCart.getCartItems());
-        int totalItem = totalItem(shoppingCart.getCartItems());
-
-        // Set the total price, total items, and associate the customer with the shopping cart
-        shoppingCart.setTotalPrice(totalPrice);
-        shoppingCart.setTotalItems(totalItem);
+        shoppingCart.setTotalPrice(totalPrice(cartItemList));
+        shoppingCart.setTotalItems(totalItem(cartItemList));
         shoppingCart.setCustomer(customer);
 
-        // Save and return the updated shopping cart
+        // Saves and returns the updated shopping cart
         return cartRepository.save(shoppingCart);
     }
-
 
     @Override
     public ShoppingCart updateCart(ProductDto productDto, int quantity, String username) {

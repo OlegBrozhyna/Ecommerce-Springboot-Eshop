@@ -34,16 +34,19 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto getCustomer(String username) {
-        CustomerDto customerDto = new CustomerDto();
         Customer customer = customerRepository.findByUsername(username);
+        if (customer == null) {
+            return null;
+        }
+        CustomerDto customerDto = new CustomerDto();
         customerDto.setFirstName(customer.getFirstName());
         customerDto.setLastName(customer.getLastName());
         customerDto.setUsername(customer.getUsername());
-        customerDto.setPassword(customer.getPassword());
         customerDto.setAddress(customer.getAddress());
         customerDto.setPhoneNumber(customer.getPhoneNumber());
         customerDto.setCity(customer.getCity());
         customerDto.setCountry(customer.getCountry());
+
         return customerDto;
     }
 

@@ -30,7 +30,7 @@ import java.security.Principal;
             Customer customer = customerService.findByUsername(principal.getName());
             ShoppingCart cart = customer.getCart();
             if (cart == null) {
-                model.addAttribute("check", true); // Позначає, що кошик порожній
+                model.addAttribute("check", true);
             } else {
                 model.addAttribute("grandTotal", cart.getTotalPrice());
             }
@@ -48,20 +48,19 @@ import java.security.Principal;
                                 Principal principal,
                                 HttpSession session) {
 
-
-        ProductDto productDto = productService.getById(id);
         if (principal == null) {
             return "redirect:/login";
         } else {
             String username = principal.getName();
-            ShoppingCart shoppingCart = cartService.addItemToCart(productDto, quantity, username);
+            ShoppingCart shoppingCart = cartService.addItemToCart(productService.getById(id), quantity, username);
             session.setAttribute("totalItems", shoppingCart.getTotalItems());
             model.addAttribute("shoppingCart", shoppingCart);
         }
         return "redirect:" + request.getHeader("Referer");
     }
 
-@RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=update")
+
+    @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=update")
     public String updateCart(@RequestParam("id") Long id,
                              @RequestParam("quantity") int quantity,
                              Model model,
