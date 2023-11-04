@@ -17,59 +17,70 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
-    private final OrderRepository orderRepository;
-    private final OrderDetailRepository detailRepository;
-    private final CustomerRepository customerRepository;
-    private final ShoppingCartService cartService;
+
+    // Service implementation for handling orders
+
+    private final OrderRepository orderRepository; // Repository for orders
+    private final OrderDetailRepository detailRepository; // Repository for order details
+    private final CustomerRepository customerRepository; // Repository for customers
+    private final ShoppingCartService cartService; // Service for managing shopping carts
 
     @Override
     public Order save(ShoppingCart shoppingCart) {
-        Order order = new Order();
-        order.setOrderDate(new Date());
-        order.setCustomer(shoppingCart.getCustomer());
-        order.setTax(2);
-        order.setTotalPrice(shoppingCart.getTotalPrice());
-        order.setAccept(false);
-        order.setPaymentMethod("Cash");
-        order.setOrderStatus("Pending");
-        order.setQuantity(shoppingCart.getTotalItems());
-        List<OrderDetail> orderDetailList = new ArrayList<>();
+        // Method to save an order based on the contents of a shopping cart
+
+        Order order = new Order(); // Create a new order
+        order.setOrderDate(new Date()); // Set the order date to the current date
+        order.setCustomer(shoppingCart.getCustomer()); // Set the customer for the order
+        order.setTax(2); // Set a default tax value (2%)
+        order.setTotalPrice(shoppingCart.getTotalPrice()); // Set the total price of the order
+        order.setAccept(false); // Set the order as not yet accepted
+        order.setPaymentMethod("Cash and Credit Card"); // Set default payment method as "Cash and Credit Card"
+        order.setOrderStatus("Pending"); // Set the order status as "Pending"
+        order.setQuantity(shoppingCart.getTotalItems()); // Set the quantity based on items in the shopping cart
+        List<OrderDetail> orderDetailList = new ArrayList<>(); // Initialize a list to hold order details
         for (CartItem item : shoppingCart.getCartItems()) {
-            OrderDetail orderDetail = new OrderDetail();
-            orderDetail.setOrder(order);
-            orderDetail.setProduct(item.getProduct());
-            detailRepository.save(orderDetail);
-            orderDetailList.add(orderDetail);
+            OrderDetail orderDetail = new OrderDetail(); // Create an order detail for each item in the shopping cart
+            orderDetail.setOrder(order); // Set the order for the order detail
+            orderDetail.setProduct(item.getProduct()); // Set the product in the order detail
+            detailRepository.save(orderDetail); // Save the order detail to the repository
+            orderDetailList.add(orderDetail); // Add the order detail to the list
         }
-        order.setOrderDetailList(orderDetailList);
-        cartService.deleteCartById(shoppingCart.getId());
-        return orderRepository.save(order);
+        order.setOrderDetailList(orderDetailList); // Set the list of order details in the order
+        cartService.deleteCartById(shoppingCart.getId()); // Delete the shopping cart after order creation
+        return orderRepository.save(order); // Save the order to the repository and return it
     }
 
     @Override
     public List<Order> findAll(String username) {
-        Customer customer = customerRepository.findByUsername(username);
-        List<Order> orders = customer.getOrders();
-        return orders;
+        // Method to find all orders associated with a specific username
+
+        Customer customer = customerRepository.findByUsername(username); // Find the customer by username
+        List<Order> orders = customer.getOrders(); // Get the list of orders associated with the customer
+        return orders; // Return the list of orders
     }
 
     @Override
     public List<Order> findALlOrders() {
-        return orderRepository.findAll();
-    }
+        // Method to retrieve all orders
 
+        return orderRepository.findAll(); // Return a list containing all orders
+    }
 
     @Override
     public Order acceptOrder(Long id) {
-        Order order = orderRepository.getById(id);
-        order.setAccept(true);
-        order.setDeliveryDate(new Date());
-        return orderRepository.save(order);
+        // Method to accept an order by its ID
+
+        Order order = orderRepository.getById(id); // Retrieve the order by its ID
+        order.setAccept(true); // Set the order status as accepted
+        order.setDeliveryDate(new Date()); // Set the delivery date to the current date
+        return orderRepository.save(order); // Save and return the updated order
     }
 
     @Override
     public void cancelOrder(Long id) {
-        orderRepository.deleteById(id);
-    }
+        // Method to cancel an order by its ID
 
+        orderRepository.deleteById(id); // Delete the order by its ID
+    }
 }
