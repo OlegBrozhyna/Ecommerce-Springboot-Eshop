@@ -10,7 +10,7 @@
     <link rel="stylesheet" th:href="@{/css/responsive.css}">
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/custom.css}">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--[if lt IE 9]>
     <script th:src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script th:src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -43,16 +43,16 @@
                         <div class="col-12 col-sm-8 text-center text-sm-left">
                             <div class="toolbar-sorter-right">
                                 <span>Sort by </span>
-                                <select id="basic" class="selectpicker show-tick form-control"
-                                        data-placeholder="$ USD" onchange="location = this.value;">
-                                    <option>--Select--</option>
-                                    <option th:value="@{/shop/shop-detail}">Normal</option>
-                                    <option th:value="@{/shop/high-price}">High Price → Low Price</option>
-                                    <option th:value="@{/shop/lower-price}">Low Price → High Price</option>
-                                    <option>Best Selling</option>
-                                </select>
+<!--                                <select id="basic" class="selectpicker show-tick form-control"-->
+<!--                                        data-placeholder="$ USD" onchange="location = this.value;">-->
+<!--                                    <option>&#45;&#45;Select&#45;&#45;</option>-->
+<!--                                    <option th:value="@{/shop/shop-detail}">Normal</option>-->
+<!--                                    <option th:value="@{/shop/high-price}">High Price → Low Price</option>-->
+<!--                                    <option th:value="@{/shop/lower-price}">Low Price → High Price</option>-->
+<!--                                    <option>Best Selling</option>-->
+<!--                                </select>-->
                             </div>
-                            <p>Showing all results</p>
+<!--                            <p>Showing all results</p>-->
                         </div>
                         <div class="col-12 col-sm-4 text-center text-sm-right">
                             <ul class="nav nav-tabs ml-auto">

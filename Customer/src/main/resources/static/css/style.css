@@ -358,7 +358,7 @@ body {
     color: #666666;
     font-size: 15px;
     font-family: 'Dosis', sans-serif;
-    line-height: 1.80857;
+    /*line-height: 1.80857;*/
 }
 
 a {
@@ -1202,25 +1202,25 @@ ul.cart-list > li.total > .btn:hover {
 
 /*------------------------------------------------------------------ Slider -------------------------------------------------------------------*/
 .cover-slides {
-    height: 350vh;
+    height: 550vh;
 }
-.slides-navigation a {
-    background: #b0b435;
-    position: absolute;
-    height: 70px;
-    width: 70px;
-    top: 50%;
-    font-size: 20px;
-    display: block;
-    color: #fff;
-    line-height: 90px;
-    text-align: center;
-    transition: all .3s ease-in-out;
-}
+/*.slides-navigation a {*/
+/*    background: #b0b435;*/
+/*    position: absolute;*/
+/*    height: 70px;*/
+/*    width: 70px;*/
+/*    top: 50%;*/
+/*    font-size: 20px;*/
+/*    display: block;*/
+/*    color: #fff;*/
+/*    line-height: 90px;*/
+/*    text-align: center;*/
+/*    transition: all .3s ease-in-out;*/
+/*}*/
 
-.slides-navigation a i {
-    font-size: 40px;
-}
+/*.slides-navigation a i {*/
+/*    font-size: 40px;*/
+/*}*/
 
 .slides-navigation a:hover {
     background: #000000;
@@ -2138,7 +2138,7 @@ ul.cart-list > li.total > .btn:hover {
 }
 
 .about-box-main {
-    padding: 70px 0px;
+    padding: 50px 0px;
 }
 
 .noo-sh-title {
@@ -3387,6 +3387,9 @@ ul.cart-list > li.total > .btn:hover {
     vertical-align: middle;
     white-space: nowrap;
 }
+img {
+    width: 200px;
+}
 
 .card-outline-secondary .card-body a {
     color: #ffffff;
@@ -3395,7 +3398,32 @@ ul.cart-list > li.total > .btn:hover {
     padding: 12px 25px;
     border: none;
 }
+.columns {
+    background-color:#ffffff;
+    border-bottom: 1px solid #808080;
+    padding-top: 20px;
+}
 
+.columns__inner {
+    display: flex;
+    justify-content: space-around;
+     align-items: flex-start;
+
+}
+
+.columns__first{
+    max-width: 300px;
+}
+.columns__second {
+    max-width: 600px;
+}
+
+.columns__first p {
+    text-transform: none;
+    font-size: 16px;
+    color: #000000;
+    text-align: justify;
+}
 
 
 

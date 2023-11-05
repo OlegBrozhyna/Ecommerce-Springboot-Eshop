@@ -30,12 +30,12 @@
   position: absolute;
   display: block;
 }
-.slides-navigation a.prev {
-  left: 0;
-}
-.slides-navigation a.next {
-  right: 0;
-}
+/*.slides-navigation a.prev {*/
+/*  left: 0;*/
+/*}*/
+/*.slides-navigation a.next {*/
+/*  right: 0;*/
+/*}*/
 
 .slides-pagination {
   position: absolute;
@@ -64,3 +64,4 @@
 .slides-pagination a.current {
   background: #222;
 }
+

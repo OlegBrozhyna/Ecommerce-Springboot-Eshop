@@ -60,18 +60,48 @@
                             <input type="text" class="form-control"
                                    th:value="${customer.address + ' ' + customer.city + ' ' + customer.country}"
                                    id="address" placeholder="" readonly>
+                            <!-- Ensure you have included jQuery library -->
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                            <!-- Your HTML code -->
                         </div>
-                        <a th:href="@{/profile}" class="btn btn-primary"> Change information</a>
+                        <a th:href="@{/profile}" class="btn btn-primary">Change Information</a>
                         <hr class="mb-4">
                         <div class="title"><span>Payment Methods</span></div>
                         <div class="d-block my-3">
                             <div class="custom-control custom-radio">
-                                <input id="debit" name="paymentMethod" type="radio" checked class="custom-control-input"
-                                       required>
+                                <input id="debit" name="paymentMethod" type="radio" checked class="custom-control-input" required>
                                 <label class="custom-control-label" for="debit">Cash</label>
                             </div>
+                            <div class="custom-control custom-radio">
+                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                <label class="custom-control-label" for="credit">Credit Card</label>
+                            </div>
                         </div>
+                        <!-- Additional fields for Credit Card payment -->
                         <hr class="mb-1">
+                        <div id="creditCardDetails" style="display: none;">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="Enter card number">
+                            <label for="expirationDate">Expiration Date</label>
+                            <input type="text" id="expirationDate" name="expirationDate" class="form-control" placeholder="MM/YY">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" class="form-control" placeholder="Enter CVV">
+                        </div>
+
+                        <!-- JavaScript to handle the display of credit card details -->
+                        <script>
+                            $(document).ready(function() {
+                                $('#credit').change(function() {
+                                    if (this.checked) {
+                                        $('#creditCardDetails').show();
+                                    } else {
+                                        $('#creditCardDetails').hide();
+                                    }
+                                });
+                            });
+                        </script>
+
                     </form>
                 </div>
             </div>
