@@ -3,6 +3,7 @@ package com.eshop.customer.controller;
 import com.eshop.library.dto.CustomerDto;
 import com.eshop.library.model.City;
 import com.eshop.library.model.Country;
+import com.eshop.library.model.Customer;
 import com.eshop.library.service.CityService;
 import com.eshop.library.service.CountryService;
 import com.eshop.library.service.CustomerService;
@@ -28,6 +29,19 @@ public class CustomerController {
     private final PasswordEncoder passwordEncoder;  // Injected PasswordEncoder for encoding and validating passwords
     private final CityService cityService;          // Injected CityService for managing city data
 
+
+
+    @GetMapping("/account")
+    public String accountHome(Model model , Principal principal){
+        if(principal == null){
+            return "redirect:/login";
+        }
+        String username = principal.getName();
+        Customer customer = customerService.findByUsername(username);
+        model.addAttribute("customer", customer);
+
+        return "account";
+    }
     @GetMapping("/profile")
     public String profile(Model model, Principal principal) {
         // Check if the user is authenticated (logged in), and show their profile
