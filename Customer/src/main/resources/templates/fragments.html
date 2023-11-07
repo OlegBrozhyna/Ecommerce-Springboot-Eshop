@@ -16,6 +16,7 @@
     <!-- Site Icons -->
     <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
     <link rel="apple-touch-icon" th:href="@{/images/apple-touch-icon.png}">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -42,15 +43,15 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="login-box">
-<!--                    <select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In"-->
-<!--                            onchange="location = this.value;">-->
-<!--                        <option>Authentication</option>-->
-<!--                        <option th:if="${session.username == null}" value="http://localhost:8889/shop/login">Sign In-->
-<!--                        </option>-->
-<!--                        <option th:if="${session.username == null}" value="http://localhost:8889/shop/register">Sign-->
-<!--                            Up-->
-<!--                        </option>-->
-<!--                    </select>-->
+                    <!--                    <select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In"-->
+                    <!--                            onchange="location = this.value;">-->
+                    <!--                        <option>Authentication</option>-->
+                    <!--                        <option th:if="${session.username == null}" value="http://localhost:8889/shop/login">Sign In-->
+                    <!--                        </option>-->
+                    <!--                        <option th:if="${session.username == null}" value="http://localhost:8889/shop/register">Sign-->
+                    <!--                            Up-->
+                    <!--                        </option>-->
+                    <!--                    </select>-->
                 </div>
                 <div class="text-slid-box">
                     <div id="offer-box" class="carouselTicker">
@@ -105,15 +106,14 @@
 
             </div>
             <!-- End Header Navigation -->
-<!--            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/menu}">Menu</a></li>
-                    <!--                    <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>-->
                     <li th:if="${#authorization.expression('isFullyAuthenticated')}">
-                        <a class="nav-link" th:href="@{/profile}">My Account</a>
+                        <a class="nav-link" th:href="@{/account}">My Account</a>
                     </li>
                     <li th:unless="${#authorization.expression('isFullyAuthenticated')}">
                         <a class="nav-link" th:href="@{/login}">Login</a>
@@ -138,7 +138,7 @@
             <!-- Start Atribute Navigation -->
             <div class="attr-nav2">
                 <ul>
-<!--                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>-->
+                    <!--                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>-->
                     <li class="side-menu">
                         <a href="#" th:href="@{/cart}">
                             <i class="fa fa-shopping-bag"></i>
@@ -279,7 +279,7 @@
 </footer>
 <div th:fragment="script">
     <!-- ALL JS FILES -->
-    <!--    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>-->
+        <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
     <script th:src="@{/js/popper.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <!-- ALL PLUGINS -->
