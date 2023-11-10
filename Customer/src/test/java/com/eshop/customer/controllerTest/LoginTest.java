@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
-public class HomeControllerTest {
+public class LoginTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -34,11 +34,13 @@ public class HomeControllerTest {
 
     @Test
     void loginTest() throws Exception {
+        // Simulating an authenticated user
         UsernamePasswordAuthenticationToken principal =
-                new UsernamePasswordAuthenticationToken("yourUsername", "yourPassword");
+                new UsernamePasswordAuthenticationToken("user@gmail.com", "12345");
         SecurityContextHolder.getContext().setAuthentication(principal);
+
+        // Making the request to the '/account' endpoint
         mockMvc.perform(get("/account"))
-                .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
