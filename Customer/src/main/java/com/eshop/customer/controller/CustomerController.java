@@ -32,16 +32,26 @@ public class CustomerController {
 
 
     @GetMapping("/account")
-    public String accountHome(Model model , Principal principal){
-        if(principal == null){
+    public String accountHome(Model model, Principal principal) {
+        // Check if the user is authenticated
+        if (principal == null) {
+            // If not authenticated, redirect to the login page
             return "redirect:/login";
         }
+
+        // Retrieve the username of the authenticated user
         String username = principal.getName();
+
+        // Fetch customer information based on the username
         Customer customer = customerService.findByUsername(username);
+
+        // Add the customer object to the model for rendering in the view
         model.addAttribute("customer", customer);
 
+        // Return the view name for rendering the account details
         return "account";
     }
+
     @GetMapping("/profile")
     public String profile(Model model, Principal principal) {
         // Check if the user is authenticated (logged in), and show their profile
