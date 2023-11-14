@@ -25,13 +25,17 @@ public class LoginTest {
     @Autowired
     private HomeController controller;
 
+    // This test verifies that the context loads successfully and the home page contains "Home" and "Login" strings.
     @Test
     void contextLoads() throws Exception {
-        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/"))
+                .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Home")))
                 .andExpect(content().string(containsString("Login")));
     }
 
+    // This test simulates an authenticated user and checks if accessing '/account' redirects to the login page.
     @Test
     void loginTest() throws Exception {
         // Simulating an authenticated user
