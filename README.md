@@ -11,6 +11,8 @@ and is based on Java and Spring Framework technologies.
 * jQuery
 * CSS
 * JavaScript
+* JUnit
+
 
 
 
