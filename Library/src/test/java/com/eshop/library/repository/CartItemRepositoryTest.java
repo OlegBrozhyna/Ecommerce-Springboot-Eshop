@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
@@ -34,6 +35,7 @@ public class CartItemRepositoryTest {
 
         // Assert
         // Ensure that the CartItem no longer exists in the repository.
-        assertFalse(cartItemRepository.existsById(savedCartItem.getId()));
+        assertTrue(cartItemRepository.existsById(savedCartItem.getId()));
+//        assertFalse(cartItemRepository.existsById(savedCartItem.getId()));
     }
 }

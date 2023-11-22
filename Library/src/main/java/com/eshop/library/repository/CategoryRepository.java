@@ -3,7 +3,9 @@ package com.eshop.library.repository;
 import com.eshop.library.dto.CategoryDto;
 import com.eshop.library.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,8 +14,9 @@ import java.util.List;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     // Custom method to update the name of a category by its ID.
+    @Modifying
     @Query(value = "update Category set name = ?1 where id = ?2")
-    Category update(String name, Long id);
+    int update(@Param("name") String name, @Param("id") Long id);
 
     // Custom method to find all categories that are activated (using a native SQL query).
     @Query(value = "select * from categories where is_activated = true", nativeQuery = true)
