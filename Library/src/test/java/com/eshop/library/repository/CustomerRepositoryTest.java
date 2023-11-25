@@ -19,36 +19,44 @@ public class CustomerRepositoryTest {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private EntityManager entityManager; // Add missing semicolon here
+    private EntityManager entityManager; // Entity manager for interacting with the database
 
     @Test
     public void testFindByUsername() {
         // Arrange
+        // Creating a new Customer entity
         Customer customer = new Customer("user12@gamail.com", "John Doe", "12345");
+
+        // Saving the customer to the database
         customerRepository.save(customer);
 
         // Force synchronization with the database
         entityManager.flush();
 
         // Act
+        // Retrieving the customer by username
         Customer foundCustomer = customerRepository.findByUsername("user12@gamail.com");
 
         // Assert
+        // Performing assertions on the retrieved customer
         assertThat(foundCustomer)
-                .isNotNull()
+                .isNotNull() // Making sure the customer is not null
                 .extracting(Customer::getUsername, Customer::getLastName, Customer::getPassword)
-                .containsExactly("user12@gamail.com", "John Doe", "12345")
+                .containsExactly("user12@gamail.com", "John Doe", "12345") // Checking individual fields
                 .doesNotContainNull(); // Make sure none of the values are null
 
+        // Additional assertion to check username case-insensitively
         assertThat(foundCustomer.getUsername()).isEqualToIgnoringCase("user12@gamail.com");
     }
 
     @Test
     public void testFindByUsername_NotFound() {
         // Act
+        // Retrieving a non-existent customer by username
         Customer foundCustomer = customerRepository.findByUsername("nonexistent_user");
 
         // Assert
+        // Verifying that the result is null for a non-existent user
         assertThat(foundCustomer).isNull();
     }
 }
