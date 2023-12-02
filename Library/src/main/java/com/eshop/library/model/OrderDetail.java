@@ -25,4 +25,6 @@ public class OrderDetail {
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 
+    public OrderDetail(Customer customer) {
+    }
 }

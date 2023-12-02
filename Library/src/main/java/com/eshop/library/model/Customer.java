@@ -43,10 +43,14 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Order> orders;
 
-    public Customer() {
+    public Customer(String mail, String johnDoe, String number) {
         this.country = "VN";
         this.cart = new ShoppingCart();
         this.orders = new ArrayList<>();
+    }
+
+    public Customer() {
+
     }
 
     @Override

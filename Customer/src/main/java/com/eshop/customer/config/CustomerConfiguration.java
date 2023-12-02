@@ -5,17 +5,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class CustomerConfiguration {
+public class CustomerConfiguration implements CustomerConfigurations {
 
+    // Define a custom UserDetailsService bean, which is used for loading user details.
     // Define a custom UserDetailsService bean, which is used for loading user details.
     @Bean
     public UserDetailsService userDetailsService() {
@@ -29,10 +30,9 @@ public class CustomerConfiguration {
     }
 
     // Configure the security filter chain and define security rules using HttpSecurity.
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder
-                = http.getSharedObject(AuthenticationManagerBuilder.class);
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
 
         // Configure the AuthenticationManager to use the custom UserDetailsService and password encoder.
         authenticationManagerBuilder
@@ -43,7 +43,7 @@ public class CustomerConfiguration {
 
         http
                 .authorizeRequests()
-                .requestMatchers("/*", "/js/**", "/css/**", "/images/**", "/webfonts/**").permitAll() // Allow access to these resources without authentication
+                .requestMatchers("/login", "/*", "/js/**", "/css/**", "/images/**", "/webfonts/**").permitAll() // Allow access to these resources without authentication
                 .requestMatchers("/customer/**").hasAuthority("CUSTOMER") // Require "CUSTOMER" authority to access URLs under /customer
                 .and()
                 .formLogin()
@@ -63,7 +63,12 @@ public class CustomerConfiguration {
                 .authenticationManager(authenticationManager) // Set the custom authentication manager
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS); // Set session creation policy to "ALWAYS"
+    }
 
-        return http.build(); // Build and return the configured HttpSecurity object
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .requestMatchers("/h2-console/**"); // Ігнорувати URL H2 Console
     }
 }

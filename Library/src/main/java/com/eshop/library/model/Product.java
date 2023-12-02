@@ -29,4 +29,9 @@ public class Product {
     private boolean is_activated;
     private boolean is_deleted;
 
+    public Product(String product1, String description1, double v) {
+    }
+
+    public Product(String laptop, String powerfulLaptop, double v, Category category, boolean b, boolean b1) {
+    }
 }

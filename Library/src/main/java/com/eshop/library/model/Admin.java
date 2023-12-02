@@ -29,4 +29,6 @@ public class Admin {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
     private List<Role> roles;
 
+    public <T> Admin(long l, String john, String doe, String s, String password, List<T> ts) {
+    }
 }

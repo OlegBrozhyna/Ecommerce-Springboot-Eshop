@@ -21,4 +21,6 @@ public class AdminDto {
     private String repeatPassword;
 
 
+    public AdminDto(String john, String doe, String s, String password) {
+    }
 }
