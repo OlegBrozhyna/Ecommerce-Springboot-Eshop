@@ -29,7 +29,6 @@ public class CategoryServiceTest {
     // Mocking the CategoryRepository for testing purposes.
     @Mock
     private CategoryRepository categoryRepository;
-
     // Injecting mocks into the CategoryServiceImpl for testing.
     @InjectMocks
     private CategoryServiceImpl categoryService;
@@ -54,7 +53,6 @@ public class CategoryServiceTest {
         assertEquals(categoryToSave.getName(), savedCategory.getName());
     }
 
-    // Testing the findAllByActivatedTrue method of CategoryServiceImpl.
     @Test
     public void testFindAllByActivatedTrue() {
         // Arrange
