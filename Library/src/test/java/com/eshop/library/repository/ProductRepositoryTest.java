@@ -119,7 +119,6 @@ class ProductRepositoryTest {
         assertThat(result).containsExactlyInAnyOrder(product1, product2, product3, product4, product5); // Verify that all original products are present in the result
     }
 
-
     @Test
     void testFilterLowerProducts() {
         // Arrange

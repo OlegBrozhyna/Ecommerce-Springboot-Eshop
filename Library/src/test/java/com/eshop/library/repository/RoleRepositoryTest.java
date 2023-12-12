@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @DataJpaTest
 class RoleRepositoryTest {
@@ -39,6 +40,7 @@ class RoleRepositoryTest {
         assertThat(foundRole).isNotNull();
         // Additional assertions can be added here based on the specific requirements
     }
+
     @Test
     void findByName_NotFound() {
         // Act
